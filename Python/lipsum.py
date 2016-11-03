@@ -2,12 +2,12 @@ import sys
 
 def readFile(data):
     with open(data, 'r') as file_data:
-        lines = file_data.read().splitlines()
+        lines = file_data.read().split('.')
     return lines
 
 def get_sentences(data, num=1):
     sentences = readFile(data)
-    ret = ' '.join(sentences[:num])
+    ret = '.'.join(sentences[:num])
     return ret
 
 def get_paragraphs(data, num=1):
@@ -19,7 +19,7 @@ def get_paragraphs(data, num=1):
 
     para = []
     for i in xrange(0, num):
-        para.append(' '.join(fileread[i*lines_per_para:(i+1)*lines_per_para]))
+        para.append('. '.join(fileread[i*lines_per_para:(i+1)*lines_per_para]))
 
     return "\n\n".join(para)
 
