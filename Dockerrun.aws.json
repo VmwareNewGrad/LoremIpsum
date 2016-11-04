@@ -1,23 +1,14 @@
 {
-    "AWSEBDockerrunVersion":1,
-    "volumes":[
+    "AWSEBDockerrunVersion": "1",
+    "Ports": [
         {
-            "name":"eb-php-app",
-            "host":{
-                "sourcePath":"/data"
-            }
+            "ContainerPort": "5000"
         }
     ],
-    "containerDefinitions":[
+    "Volumes": [
         {
-            "name":"eb-php-app",
-            "essential":true,
-            "portMappings":[
-                {
-                    "hostPort":80,
-                    "containerPort":5000
-                }
-            ]
+            "HostDirectory": "/var/app/current",
+            "ContainerDirectory": "/data"
         }
     ]
 }
