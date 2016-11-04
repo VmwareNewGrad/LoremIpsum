@@ -1928,6 +1928,8 @@
 
 	form {
 		margin: 0 0 2em 0;
+		color: white;
+		font-size: 14pt;
 	}
 
 		form .field {
@@ -2930,7 +2932,7 @@
 		}
 
 		#banner h1 {
-			font-size: 3.5em;
+			font-size: 4em;
 			font-weight: 400;
 			color: #fff;
 			line-height: 1em;
@@ -3142,4 +3144,8 @@
 				padding: 3em 0;
 			}
 
+		}
+
+		#textOutput {
+    	padding: 40pt;
 		}
