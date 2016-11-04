@@ -3,6 +3,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 
+opening_tag = "&#60;&#112;&#62;"
+closing_tag = "&#60;&#47;&#112;&#62;"
 app = Flask(__name__)
 
 @app.route("/")
@@ -15,15 +17,8 @@ def getP():
     if num <= 0:
         return ""
 
-    return get_paragraphs('big_data.txt', num)
-
-@app.route("/getS")
-def getS():
-    num = int(request.args.get('num'))
-    if num <= 0:
-        return ""
-
-    return get_sentences('big_data.txt', num)
+    htmlformat = int(request.args.get('htmlformat'))
+    return get_paragraphs('big_data.txt', num, htmlformat)
 
 @app.route("/getL")
 def getL():
@@ -31,7 +26,8 @@ def getL():
     if num <= 0:
         return ""
 
-    return get_letters('big_data.txt', num)
+    htmlformat = int(request.args.get('htmlformat'))
+    return get_letters('big_data.txt', num, htmlformat)
 
 @app.route("/getW")
 def getW():
@@ -39,8 +35,8 @@ def getW():
     if num <= 0:
         return ""
 
-    return get_words('big_data.txt', num)
-
+    htmlformat = int(request.args.get('htmlformat'))
+    return get_words('big_data.txt', num, htmlformat)
 
 def readFile(data):
     with open(data, 'r') as file_data:
@@ -48,13 +44,7 @@ def readFile(data):
 
     return lines
 
-def get_sentences(data, num=1):
-    sentences = readFile(data)
-    ret = '.'.join(sentences[:num])
-
-    return ret
-
-def get_paragraphs(data, num=1):
+def get_paragraphs(data, num=1, htmlformat=0):
     lines_per_para = 10
 
     fileread = readFile(data)
@@ -65,17 +55,25 @@ def get_paragraphs(data, num=1):
     for i in xrange(0, num):
         para.append('. '.join(fileread[i*lines_per_para:(i+1)*lines_per_para]))
 
-    return "<br><br>".join(para)
+    text = "<br><br>".join(para)
+    if (htmlformat==0):
+        return text
+    else:
+        return opening_tag + text + closing_tag
 
-def get_words(data, num=1):
+def get_words(data, num=1, htmlformat=0):
     words = []
     fileread = readFile(data)
     for line in fileread:
         words += line.split()
 
-    return ' '.join(words[:num])
+    text = ' '.join(words[:num])
+    if (htmlformat==0):
+        return text
+    else:
+        return opening_tag + text + closing_tag
 
-def get_letters(data, num=1):
+def get_letters(data, num=1, htmlformat=0):
     fileread = readFile(data)
 
     letters = []
@@ -85,7 +83,11 @@ def get_letters(data, num=1):
             if len(letters) > num:
                 break
 
-    return ''.join(letters[:num])
+    text = ''.join(letters[:num])
+    if (htmlformat==0):
+        return text
+    else:
+        return opening_tag + text + closing_tag
 
 #def main(argv):
 #    data = argv[0]
