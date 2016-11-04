@@ -42,5 +42,5 @@ if(document.getElementById('paraPick').checked) {
 
 
 } else {
-alert("error: No radio button checked");
+    alert("error: No radio button checked");
 }
