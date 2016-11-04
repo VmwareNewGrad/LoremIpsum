@@ -12,23 +12,33 @@ def indexPage():
 @app.route("/getP")
 def getP():
     num = int(request.args.get('num'))
+    if num <= 0:
+        return ""
 
     return get_paragraphs('big_data.txt', num)
 
 @app.route("/getS")
 def getS():
     num = int(request.args.get('num'))
+    if num <= 0:
+        return ""
 
     return get_sentences('big_data.txt', num)
 
 @app.route("/getL")
 def getL():
     num = int(request.args.get('num'))
+    if num <= 0:
+        return ""
+
     return get_letters('big_data.txt', num)
 
 @app.route("/getW")
 def getW():
     num = int(request.args.get('num'))
+    if num <= 0:
+        return ""
+
     return get_words('big_data.txt', num)
 
 
