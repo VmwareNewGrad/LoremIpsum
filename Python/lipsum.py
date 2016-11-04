@@ -12,7 +12,7 @@ def get_sentences(data, num=1):
 
 def get_paragraphs(data, num=1):
     lines_per_para = 10
-    
+
     fileread = readFile(data)
     if num*lines_per_para > len(fileread):
         lines_per_para = len(fileread) // num
