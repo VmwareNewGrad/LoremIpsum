@@ -10,8 +10,7 @@ WORKDIR /data
 
 ENV FLASK_APP=lipsum.py
 
-CMD ["lipsum.py"]
+CMD ["python", "/data/lipsum.py"]
 
 EXPOSE 5000
 
-ENTRYPOINT ["python"]
